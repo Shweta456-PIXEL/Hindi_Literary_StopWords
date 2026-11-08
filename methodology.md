@@ -3,57 +3,55 @@
 
 ## 1. Project Objective
 
-This project develops an experimental, curated Hindi stopword resource for literary text analysis. It explores how common grammatical words can be filtered while preserving meaningful literary vocabulary.
+To develop an experimental Hindi stopword resource for processing literary and poetic texts using Python.
 
-## 2. What Are Stopwords?
+## 2. Stopword Selection
 
-Stopwords are frequently occurring words that may contribute less to certain text-processing tasks. Examples include conjunctions, postpositions and auxiliary verbs.
+The initial list contains 39 words organised into four groups:
 
-However, a word is not universally unimportant. Its relevance depends on the research question and textual context.
-
-## 3. Selection Criteria
-
-The initial list was organised into the following categories:
-
-- Conjunctions: और, तथा, लेकिन
+- Conjunctions: और, तथा, लेकिन, क्योंकि
 - Relative words: जो, जिसे, जिसका
 - Postpositions: का, की, के, में, से
 - Auxiliary verbs: है, हैं, था, थी
 
-Words were selected based on their grammatical function and expected usefulness for literary text processing.
+## 3. Words Preserved
 
-## 4. Preservation of Meaningful Words
+Meaningful literary vocabulary such as प्रकृति, नदी, वन, जल, जीवन and मनुष्य is excluded from the stopword list.
 
-Words such as प्रकृति, नदी, वन, जल, मनुष्य and मन were excluded from the stopword list because they may carry thematic and symbolic significance in poetry.
+Negation words such as नहीं are also preserved because their removal may change sentence meaning.
 
-Negation words such as नहीं and न are also preserved because removing them may reverse or alter a sentence's meaning.
+## 4. Implementation
 
-## 5. Implementation
+The project uses Python and the following process:
 
-The project uses Python to:
+1. Load stopwords from stopwords.txt.
+2. Normalize text using Unicode NFC.
+3. Split text using whitespace-based tokenization.
+4. Compare tokens with the curated stopword list.
+5. Remove matching words.
+6. Preserve punctuation and remaining vocabulary.
 
-1. Store a curated set of Hindi stopwords.
-2. Normalize text using Unicode NFC normalization.
-3. Tokenize text using whitespace separation.
-4. Identify and remove selected stopwords.
-5. Display the original and processed text.
+## 5. Testing
+
+The function was tested on four sample Hindi sentences.
+
+The tests checked stopword removal, meaningful-word preservation, negation preservation and punctuation preservation.
 
 ## 6. Limitations
 
-- The current list is small and experimental.
-- It is not a universal Hindi stopword standard.
-- Context-dependent words may have literary significance.
-- Whitespace tokenization does not handle every Hindi linguistic variation.
-- The list requires testing on a larger and more diverse Hindi poetry corpus.
+- The list is experimental and not a universal Hindi NLP standard.
+- It contains only 39 selected words.
+- Whitespace tokenization cannot handle every linguistic variation.
+- Some grammatical words may carry literary meaning depending on context.
+- Evaluation on a larger poetry corpus is still required.
 
-## 7. Future Improvements
+## 7. Future Scope
 
-- Validate the list against selected Hindi poems.
-- Compare it with existing Hindi NLP stopword resources.
-- Add linguistic and contextual evaluation.
-- Improve tokenization and punctuation handling.
-- Document additions and exclusions with examples.
+- Test on a larger Hindi poetry corpus.
+- Compare with existing Hindi NLP resources.
+- Improve tokenization.
+- Study how stopword removal affects literary interpretation.
 
 ## 8. Research Ethics
 
-The project uses original implementation and curated word selection. Literary texts used for evaluation will be checked for copyright and source attribution before redistribution.
+Literary texts used for evaluation should be appropriately attributed. Copyright restrictions must be checked before redistributing poems.
