@@ -31,7 +31,7 @@ def normalize_text(text):
 def remove_stopwords(text, stopwords=None):
     """
     Remove selected Hindi stopwords while preserving
-    the original spelling and punctuation of retained words.
+    punctuation and the original spelling of retained words.
     """
     if stopwords is None:
         stopwords = HINDI_STOPWORDS
@@ -39,12 +39,13 @@ def remove_stopwords(text, stopwords=None):
     text = normalize_text(text)
     cleaned_tokens = []
 
+    punctuation = "।॥,!?;:()[]{}\"'“”‘’"
+
     for token in text.split():
-        # Ignore punctuation at the beginning/end for matching.
-       word = token.strip("।॥,!?;:()[]{}\"'“”‘’")
+        word = token.strip(punctuation)
         normalized_word = normalize_text(word)
 
-        if not normalized_word or normalized_word not in stopwords:
+        if normalized_word not in stopwords:
             cleaned_tokens.append(token)
 
     return " ".join(cleaned_tokens)
