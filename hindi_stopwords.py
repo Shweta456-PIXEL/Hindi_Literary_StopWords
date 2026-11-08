@@ -41,7 +41,7 @@ def remove_stopwords(text, stopwords=None):
 
     for token in text.split():
         # Ignore punctuation at the beginning/end for matching.
-        word = re.sub(r"^[^\w]+|[^\w]+$", "", token)
+       word = token.strip("।॥,!?;:()[]{}\"'“”‘’")
         normalized_word = normalize_text(word)
 
         if not normalized_word or normalized_word not in stopwords:
