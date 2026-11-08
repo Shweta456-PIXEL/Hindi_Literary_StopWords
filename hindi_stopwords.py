@@ -1,51 +1,36 @@
-
-import re
 import unicodedata
 
-# Curated initial stopword list for Hindi literary text.
-# This is an experimental list, not a universal Hindi NLP standard.
-
 HINDI_STOPWORDS = {
-    # Conjunctions
     "और", "तथा", "एवं", "या", "अथवा",
     "लेकिन", "मगर", "किंतु", "परंतु", "क्योंकि",
     "यदि", "अगर", "कि", "जबकि",
 
-    # Relative and connective words
     "जो", "जिस", "जिसे", "जिसका", "जिसकी", "जिसके",
 
-    # Postpositions
     "का", "की", "के", "को", "से", "में",
     "पर", "तक", "द्वारा", "हेतु", "साथ", "बिना",
 
-    # Common auxiliary forms
     "है", "हैं", "था", "थी", "थे", "हूँ", "हो",
 }
 
 
 def normalize_text(text):
-    """Normalize Unicode text to NFC form."""
     return unicodedata.normalize("NFC", text)
 
 
 def remove_stopwords(text, stopwords=None):
-    """
-    Remove selected Hindi stopwords while preserving
-    punctuation and the original spelling of retained words.
-    """
     if stopwords is None:
         stopwords = HINDI_STOPWORDS
 
-    text = normalize_text(text)
-    cleaned_tokens = []
-
+    stopwords = {normalize_text(word) for word in stopwords}
     punctuation = "।॥,!?;:()[]{}\"'“”‘’"
 
-    for token in text.split():
-        word = token.strip(punctuation)
-        normalized_word = normalize_text(word)
+    cleaned_tokens = []
 
-        if normalized_word not in stopwords:
+    for token in normalize_text(text).split():
+        word = token.strip(punctuation)
+
+        if normalize_text(word) not in stopwords:
             cleaned_tokens.append(token)
 
     return " ".join(cleaned_tokens)
@@ -54,8 +39,5 @@ def remove_stopwords(text, stopwords=None):
 if __name__ == "__main__":
     sample_text = "प्रकृति और मनुष्य का संबंध बहुत गहरा है।"
 
-    print("Original text:")
-    print(sample_text)
-
-    print("\nAfter stopword removal:")
-    print(remove_stopwords(sample_text))
+    print("Original:", sample_text)
+    print("Cleaned:", remove_stopwords(sample_text))
